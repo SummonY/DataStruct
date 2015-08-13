@@ -21,6 +21,10 @@ void inVisitNonRec(BiTree T);
 void postVisitRec(BiTree T);
 void postVisitNonRec(BiTree T);
 
+void levelVisit(BiTree T);
+
+int depthOfBiTree(BiTree T);
+
 int main()
 {
     BiTree T;
@@ -47,8 +51,7 @@ int main()
     cout << "\n层次遍历二叉树：" << endl;
 
 
-    cout << "\n二叉树的深度: " << endl;
-
+    cout << "\n二叉树的深度: " << depthOfBiTree(T) << endl;
 
     return 0;
 }
@@ -111,4 +114,20 @@ void postVisitRec(BiTree T)
         postVisitRec(T->right);
         cout << T->data << " ";
     }
+}
+
+/*
+ * 二叉树的深度
+ */
+int depthOfBiTree(BiTree T)
+{
+    if (!T)
+        return 0;
+    if (T->left == nullptr && T->right == nullptr)
+        return 1;
+
+    int leftDepth = depthOfBiTree(T->left);
+    int rightDepth = depthOfBiTree(T->right);
+
+    return (leftDepth > rightDepth) ? leftDepth + 1 : rightDepth + 1;
 }
